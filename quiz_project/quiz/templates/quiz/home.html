@@ -1,0 +1,14 @@
+{% extends 'quiz/base.html' %}
+{% block title %}Ласкаво просимо{% endblock %}
+{% block content %}
+<div class="row justify-content-center text-center mt-5">
+<div class="col-md-6">
+<div class="card p-5">
+<h1 class="mb-4 fw-bold">Ласкаво просимо в Онлайн-вікторину!</h1>
+<p class="mb-4">Виберіть дію:</p>
+<a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2 mb-2">Увійти</a>
+<a href="{% url 'student_register' %}" class="btn btn-success btn-lg mb-2">Реєстрація учня</a>
+</div>
+</div>
+</div>
+{% endblock %}

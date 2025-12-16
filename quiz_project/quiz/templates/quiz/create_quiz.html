@@ -1,0 +1,17 @@
+{% extends 'quiz/base.html' %}
+{% block title %}Створити вікторину{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="mb-3">Створити вікторину для {{ quest.title }}</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">Створити вікторину</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
