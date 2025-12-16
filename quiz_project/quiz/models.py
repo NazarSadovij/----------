@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class User(AbstractUser):
+    is_teacher = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=True)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=50, blank=True)
@@ -50,3 +54,5 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text
+
+

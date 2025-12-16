@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import (StudentRegisterForm, ClassForm, JoinClassForm,
                     QuestForm, QuizForm, QuestionForm)
 from .models import Profile, Class, StudentClass, Quest, Quiz, Question
+from django.http import HttpResponseForbidden
+
 
 def home(request):
     return render(request, 'quiz/home.html')
@@ -75,3 +77,21 @@ def join_class(request):
     else:
         form = JoinClassForm()
     return render(request, 'quiz/join_class.html', {'form': form})
+
+
+@login_required
+def quiz_create(request):
+    if not request.user.is_teacher:
+        return HttpResponseForbidden("Тільки вчитель може створювати вікторини")
+
+    if request.method == 'POST':
+        form = QuizForm(request.POST)
+        if form.is_valid():
+            quiz = form.save(commit=False)
+            quiz.created_by = request.user
+            quiz.save()
+            return redirect('home')
+    else:
+        form = QuizForm()
+
+    return render(request, 'quiz/quiz_create.html', {'form': form})
